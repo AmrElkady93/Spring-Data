@@ -9,17 +9,19 @@ import com.jdbcmodule.utilities.UserExtractor;
 import com.jdbcmodule.interfaces.UserDAOInterface;
 import com.spring.entities.User;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Amr Elkady
  */
-@Service
+@Repository
 public class UserDAOImplementation implements UserDAOInterface {
 
     @Autowired
@@ -30,6 +32,11 @@ public class UserDAOImplementation implements UserDAOInterface {
         this.dataSource = dataSource;
     }
 
+     @PostConstruct
+    public void setJdbcTemplate() {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    }
+    
     public int count() {
         String sql = "select count(*) from user " ;
         return jdbcTemplate.queryForObject(sql, Integer.class);
