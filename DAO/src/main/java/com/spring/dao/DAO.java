@@ -8,7 +8,7 @@ public interface DAO<Entity> {
     public List<Entity> getAll();
     public <ID> Entity getRecordByID(ID id);
     public Entity insert(Entity entity);
-    public Entity update(Entity entity);
+    public void update(Entity entity);
     public <ID> void deleteByID(ID id);
     public <Obj> void deleteByObject(Obj entity);
 
