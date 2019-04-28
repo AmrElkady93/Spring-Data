@@ -73,21 +73,18 @@ public class UserDAOImplementation implements UserDAOInterface {
         String sql = "update user set email=" + user.getEmail() + ",address=" + user.getAddress() + ","
                 + "phone=" + user.getPhone() + ","
                 + "mobile=" + user.getMobile() + ","
-                + "dateOfBirth=" + user.getDateOfBirth() + ","
-                + "registrationDate=" + user.getRegistrationDate() + ","
-                + "userName=" + user.getUserName() + ","
+                + "date_of_birth=" + user.getDateOfBirth() + ","
+                + "registration_date=" + user.getRegistrationDate() + ","
+                + "user_name=" + user.getUserName() + ","
                 + "password=" + user.getPassword() + ","
-                + "fullName=" + user.getFullName() + " where id=" + user.getId();
+                + "full_name=" + user.getFullName() + " where id=" + user.getId();
         jdbcTemplate.update(sql);
     }
-
     public <ID> void deleteByID(ID id) {
         String sql = "delete from user where id = ?";
         Object[] arg = new Object[]{id};
         jdbcTemplate.update(sql, arg);
     }
-
     public <Obj> void deleteByObject(Obj entity) {        
     }
-
 }

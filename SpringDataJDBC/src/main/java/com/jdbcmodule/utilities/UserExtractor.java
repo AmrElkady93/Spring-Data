@@ -19,12 +19,20 @@ import org.springframework.jdbc.core.ResultSetExtractor;
  */
 public class UserExtractor implements ResultSetExtractor<List<User>> {
 
-    public List<User> extractData(ResultSet rs) throws SQLException, DataAccessException {
+    public List<User> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
         List<User> users = new ArrayList<>();
-        while (rs.next()) {
+        while (resultSet.next()) {
             User user = new User();
-            user.setAddress(rs.getString("address"));
-            users.add(user);
+            user.setId(resultSet.getInt("id"));
+        user.setEmail(resultSet.getString("email"));
+        user.setAddress(resultSet.getString("address"));
+        user.setPhone(resultSet.getString("phone"));
+        user.setMobile(resultSet.getString("mobile"));
+        user.setDateOfBirth(resultSet.getDate("date_of_birth"));
+        user.setRegistrationDate(resultSet.getDate("registration_date"));
+        user.setUserName(resultSet.getString("user_name"));
+        user.setPassword(resultSet.getString("password"));
+        user.setFullName(resultSet.getString("full_name"));
 
         }
 
