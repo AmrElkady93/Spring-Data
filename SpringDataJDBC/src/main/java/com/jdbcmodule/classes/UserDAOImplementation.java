@@ -32,18 +32,18 @@ public class UserDAOImplementation implements UserDAOInterface {
         this.dataSource = dataSource;
     }
 
-     @PostConstruct
+    @PostConstruct
     public void setJdbcTemplate() {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
-    
+
     public int count() {
-        String sql = "select count(*) from user " ;
+        String sql = "select count(*) from user ";
         return jdbcTemplate.queryForObject(sql, Integer.class);
     }
 
     public List<User> getAll() {
-        String sql = "select * from  user" ;
+        String sql = "select * from  user";
         //Object[] param=new Object[]{id};
         List<User> users = jdbcTemplate.query(sql, new UserExtractor());
         return users;
@@ -68,8 +68,17 @@ public class UserDAOImplementation implements UserDAOInterface {
         return entity;
     }
 
-    public void update(User entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update(User user) {
+
+        String sql = "update user set email=" + user.getEmail() + ",address=" + user.getAddress() + ","
+                + "phone=" + user.getPhone() + ","
+                + "mobile=" + user.getMobile() + ","
+                + "dateOfBirth=" + user.getDateOfBirth() + ","
+                + "registrationDate=" + user.getRegistrationDate() + ","
+                + "userName=" + user.getUserName() + ","
+                + "password=" + user.getPassword() + ","
+                + "fullName=" + user.getFullName() + " where id=" + user.getId();
+        jdbcTemplate.update(sql);
     }
 
     public <ID> void deleteByID(ID id) {
@@ -78,9 +87,7 @@ public class UserDAOImplementation implements UserDAOInterface {
         jdbcTemplate.update(sql, arg);
     }
 
-    public <Obj> void deleteByObject(Obj entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public <Obj> void deleteByObject(Obj entity) {        
     }
 
-    
 }

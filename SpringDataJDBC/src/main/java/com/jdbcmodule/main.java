@@ -31,8 +31,8 @@ public class main {
         user.setUserName("AmrSaber");
         user.setPassword("1235");
         user.setEmail("amrelkady93@gmail.com");
-        System.out.print(dao.count());
-
+        //dao.getAll().forEach(u -> System.out.println(u.getAddress()));
+        System.out.println(dao.getRecordByID(94).getEmail());
     }
 
 }
